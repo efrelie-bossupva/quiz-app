@@ -90,6 +90,7 @@ export default function AppV3() {
       quiz_total_score: totalScore,
       quiz_result_band: resultBand.title,
       tag: resultBand.tag,
+      quiz_tag: resultBand.tag,
       highest_concern_summary: highestConcernSummary,
       q1_inquiries: answers.q1_inquiries ?? 0,
       q2_ai: answers.q2_ai ?? 0,
@@ -104,7 +105,7 @@ export default function AppV3() {
     console.log('[GHL Payload Ready]', payload);
 
     try {
-      // Primary save target: quiz_submissions (with explicit business_name & website_url)
+      // Primary save target: quiz_submissions (with explicit business_name, website_url & quiz_tag)
       const submissionRecord = {
         first_name: formData.firstName,
         last_name: '',
@@ -113,9 +114,10 @@ export default function AppV3() {
         business_name: formData.businessName,
         website_url: formData.websiteUrl,
         score: totalScore,
+        quiz_tag: resultBand.tag,
         answers: [
           {
-            quiz_tag: 'quiz-3',
+            quiz_tag: resultBand.tag,
             result_tag: resultBand.tag,
             quiz_name: QUIZ_METADATA.name,
             business_name: formData.businessName,

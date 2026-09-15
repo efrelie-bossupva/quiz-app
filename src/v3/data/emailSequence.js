@@ -123,22 +123,38 @@ Heather
 export const GHL_AUTOMATION_RULES = {
   onSubmission: {
     STRUCTURALLY_SOUND: {
-      scoreRange: '0-6',
+      scoreRange: '0–6',
       tag: 'quiz-brand-structurally-sound',
-      action: 'Send Email 1-5 sequence. If not booked after Day 9, transition to Heather\'s monthly email list.'
+      workflow: [
+        'Save tag "quiz-brand-structurally-sound" to quiz_tag field',
+        'Send initial result email',
+        'Add to the standard follow-up sequence',
+        'If they do not book: Move to Heather\'s monthly email list'
+      ]
     },
     YOU_SMELL_SMOKE: {
-      scoreRange: '7-14',
+      scoreRange: '7–14',
       tag: 'quiz-brand-smell-smoke',
-      action: 'Send Email 1-5 sequence. Primary CTA: BEGIN A CONVERSATION.'
+      workflow: [
+        'Save tag "quiz-brand-smell-smoke" to quiz_tag field',
+        'Send initial result email',
+        'Add to follow-up sequence (Primary CTA: BEGIN A CONVERSATION)',
+        'If they book: Remove from quiz nurture sequence'
+      ]
     },
     ITS_ALREADY_BURNED: {
-      scoreRange: '15-21',
+      scoreRange: '15–21',
       tag: 'quiz-brand-already-burned',
-      action: 'Send Email 1-5 sequence. If completed without booking, create a task in GHL for Heather to personally follow up (human outreach).'
+      workflow: [
+        'Save tag "quiz-brand-already-burned" to quiz_tag field',
+        'Send initial result email',
+        'Add to follow-up sequence (Primary CTA: BEGIN A CONVERSATION)',
+        'If they book: Immediately remove from nurture sequence',
+        'If they complete the sequence and DO NOT book: Create a task in GoHighLevel for Heather to personally follow up (human outreach, not automated 6th email)'
+      ]
     }
   },
   onBooking: {
-    rule: 'Immediately exit contact from quiz nurture sequence. Do not continue sending awareness emails to someone who has already booked.'
+    rule: 'Immediately exit/remove contact from quiz nurture sequence upon booking.'
   }
 };
