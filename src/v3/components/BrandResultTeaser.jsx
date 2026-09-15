@@ -89,9 +89,9 @@ export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitti
             <label className="form-label" htmlFor="websiteUrl">Website URL *</label>
             <input
               id="websiteUrl"
-              type="url"
+              type="text"
               className="form-input"
-              placeholder="https://yourbrand.com"
+              placeholder="yourbrand.com"
               value={websiteUrl}
               onChange={(e) => setWebsiteUrl(e.target.value)}
               required
