@@ -142,14 +142,14 @@
   justify-content: center;
   width: 100%;
   padding: 18px 30px;
-  background-color: #6a2472;
+  background-color:var(--brand-magenta);
   color: #ffffff;
   font-weight: 600;
   font-size: 0.92rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border: none;
-  border-radius: 0;
+  border-radius:var(--radius-md);
   transition: var(--transition-fast);
   box-shadow: 0 4px 12px rgba(165, 27, 98, 0.25);
   cursor: pointer;
