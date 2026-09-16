@@ -1,3 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
+
+:root {
+  /* Global Typography */
+  --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Montserrat', sans-serif;
+
+  /* Updated Brand Color Palette */
+  --brand-purple: #6A2472;
+  --brand-purple-hover: #531c59;
+  --brand-magenta: #A51B62;
+  --brand-magenta-hover: #86144e;
+  --brand-light-blue: #a0f1ff;
+  --brand-light-blue-bg: rgba(160, 241, 255, 0.25);
+  
+  /* Retained Variables mapped to new Palette */
+  --brand-plum: #6A2472;
+  --brand-plum-hover: #531c59;
+  --brand-plum-light: rgba(160, 241, 255, 0.2);
+
+  /* Backgrounds & Surfaces */
+  --bg-color: #fcfcfd;
+  --surface-bg: #ffffff;
+  --surface-card: #ffffff;
+  --surface-card-hover: rgba(160, 241, 255, 0.15);
+  --surface-card-selected: rgba(160, 241, 255, 0.35);
+
+  /* Text & Border Colors */
+  --text-primary: #6A2472;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --border-color: #a0f1ff;
+
+  /* Radius & Transitions */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --shadow-subtle: 0 15px 30px rgba(106, 36, 114, 0.06);
+  --shadow-card: 0 6px 16px rgba(165, 27, 98, 0.12);
+  --transition-fast: all 0.2s ease;
+}
+
 /* Main Page Container */
 .brand-quiz-container {
   min-height: 100vh;
@@ -53,7 +96,7 @@
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--brand-magenta);
   margin-bottom: 12px;
 }
 
@@ -70,7 +113,7 @@
 .brand-main-title {
   font-family: var(--font-serif);
   font-size: 2.6rem;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.18;
   color: var(--text-primary);
   margin-bottom: 14px;
@@ -96,31 +139,33 @@
 
 .brand-landing-copy p.highlight {
   color: var(--text-primary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* Primary Button (Plum #612058) */
+/* Primary Button (Updated to Magenta Accent) */
 .brand-btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   padding: 18px 30px;
-  background-color: var(--brand-plum);
+  background-color: var(--brand-magenta);
   color: #ffffff;
   font-weight: 600;
   font-size: 0.92rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  border: none;
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
-  box-shadow: 0 4px 12px rgba(97, 32, 88, 0.2);
+  box-shadow: 0 4px 12px rgba(165, 27, 98, 0.25);
+  cursor: pointer;
 }
 
 .brand-btn-primary:hover {
-  background-color: var(--brand-plum-hover);
+  background-color: var(--brand-magenta-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(97, 32, 88, 0.28);
+  box-shadow: 0 6px 16px rgba(165, 27, 98, 0.35);
 }
 
 .brand-btn-primary:disabled {
@@ -139,16 +184,17 @@
   background-color: transparent;
   color: var(--text-secondary);
   font-size: 0.88rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.06em;
   border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   transition: var(--transition-fast);
+  cursor: pointer;
 }
 
 .brand-btn-secondary:hover:not(:disabled) {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
+  border-color: var(--brand-purple);
+  color: var(--brand-purple);
   background-color: #ffffff;
 }
 
@@ -174,7 +220,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--brand-magenta);
   font-weight: 600;
   margin-bottom: 16px;
   display: block;
@@ -205,9 +251,9 @@
   background: var(--surface-card);
   border: 1.5px solid var(--border-color);
   border-radius: var(--radius-md);
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-size: 1.02rem;
-  font-weight: 400;
+  font-weight: 500;
   text-align: left;
   transition: var(--transition-fast);
   cursor: pointer;
@@ -215,13 +261,14 @@
 
 .quiz-option-button:hover {
   background: var(--surface-card-hover);
-  border-color: rgba(97, 32, 88, 0.4);
+  border-color: var(--brand-purple);
 }
 
 .quiz-option-button.selected {
   background: var(--surface-card-selected);
-  border-color: var(--brand-plum);
-  color: var(--text-primary);
+  border-color: var(--brand-purple);
+  color: var(--brand-purple);
+  font-weight: 600;
   box-shadow: var(--shadow-card);
 }
 
@@ -231,7 +278,7 @@
   justify-content: center;
   width: 20px;
   height: 20px;
-  border: 2px solid #b5b1aa;
+  border: 2px solid var(--brand-purple);
   border-radius: 50%;
   margin-right: 16px;
   flex-shrink: 0;
@@ -239,8 +286,8 @@
 }
 
 .quiz-option-button.selected .quiz-option-indicator {
-  border-color: var(--brand-plum);
-  background-color: var(--brand-plum);
+  border-color: var(--brand-purple);
+  background-color: var(--brand-purple);
 }
 
 .quiz-option-indicator::after {
@@ -285,7 +332,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--brand-magenta);
   font-weight: 600;
   margin-bottom: 8px;
 }
@@ -293,14 +340,14 @@
 .teaser-result-band {
   font-family: var(--font-serif);
   font-size: 2.2rem;
-  font-weight: 600;
-  color: var(--brand-plum);
+  font-weight: 700;
+  color: var(--brand-purple);
   letter-spacing: 0.02em;
 }
 
 .teaser-text-box {
-  background: var(--brand-plum-light);
-  border-left: 4px solid var(--brand-plum);
+  background: var(--brand-light-blue-bg);
+  border-left: 4px solid var(--brand-magenta);
   padding: 22px 26px;
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   font-size: 1.08rem;
@@ -355,13 +402,14 @@
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-size: 0.98rem;
+  font-family: var(--font-sans);
   transition: var(--transition-fast);
 }
 
 .form-input:focus {
-  border-color: var(--brand-plum);
+  border-color: var(--brand-purple);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(97, 32, 88, 0.12);
+  box-shadow: 0 0 0 3px rgba(160, 241, 255, 0.5);
 }
 
 .form-field-microcopy {
@@ -404,14 +452,14 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: var(--brand-plum);
+  background: var(--brand-magenta);
 }
 
 .personal-greeting {
   font-size: 0.82rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brand-plum);
+  color: var(--brand-magenta);
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -419,7 +467,7 @@
 .result-band-main-title {
   font-family: var(--font-serif);
   font-size: 2.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 16px;
 }
@@ -444,7 +492,7 @@
   font-size: 0.78rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--brand-plum);
+  color: var(--brand-magenta);
   font-weight: 600;
   margin-bottom: 16px;
 }
@@ -471,14 +519,14 @@
 }
 
 .point-bullet {
-  color: var(--brand-plum);
+  color: var(--brand-magenta);
   font-size: 1.2rem;
   line-height: 1;
 }
 
 .editorial-statement-box {
-  background: var(--brand-plum-light);
-  border: 1.5px solid rgba(97, 32, 88, 0.25);
+  background: var(--brand-light-blue-bg);
+  border: 1.5px solid var(--brand-light-blue);
   padding: 30px 26px;
   border-radius: var(--radius-md);
   text-align: center;
@@ -488,8 +536,8 @@
 .editorial-statement-text {
   font-family: var(--font-serif);
   font-size: 1.3rem;
-  color: var(--brand-plum);
-  letter-spacing: 0.04em;
+  color: var(--brand-purple);
+  letter-spacing: 0.02em;
   font-weight: 600;
   line-height: 1.4;
 }
@@ -504,17 +552,17 @@
 /* Heather's Story Section */
 .heathers-story-card {
   background: #ffffff;
-  border: 1.5px solid rgba(97, 32, 88, 0.3);
+  border: 1.5px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 44px 36px;
-  box-shadow: 0 4px 20px rgba(97, 32, 88, 0.08);
+  box-shadow: 0 4px 20px rgba(106, 36, 114, 0.05);
 }
 
 .heathers-story-card .story-headline {
   font-family: var(--font-serif);
   font-size: 2rem;
-  color: var(--brand-plum);
-  letter-spacing: 0.06em;
+  color: var(--brand-purple);
+  letter-spacing: 0.02em;
   margin-bottom: 20px;
 }
 
@@ -528,11 +576,11 @@
 .heathers-story-card p.quote-highlight {
   font-family: var(--font-serif);
   font-size: 1.25rem;
-  color: var(--text-primary);
+  color: var(--brand-purple);
   font-style: italic;
   margin: 24px 0;
   padding-left: 18px;
-  border-left: 3px solid var(--brand-plum);
+  border-left: 3px solid var(--brand-magenta);
 }
 
 .rebuild-lines {
@@ -558,7 +606,7 @@
   font-size: 0.76rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--brand-plum);
+  color: var(--brand-magenta);
   font-weight: 600;
   margin-bottom: 6px;
 }
