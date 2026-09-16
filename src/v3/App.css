@@ -64,7 +64,7 @@
 }
 
 .brand-navbar-logo {
-  height: 40px;
+  height: 80px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -641,7 +641,7 @@
   }
 
   .brand-navbar-logo {
-    height: 32px;
+    height: 52px;
   }
 
   .brand-main-title {
