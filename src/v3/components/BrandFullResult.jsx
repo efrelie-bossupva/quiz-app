@@ -7,6 +7,18 @@ export default function BrandFullResult({ leadData, resultBand, insights, onCtaC
   const isSmellSmoke = band.title === 'YOU SMELL SMOKE';
   const isAlreadyBurned = band.title === "IT'S ALREADY BURNED";
 
+  // Target booking URL
+  const BOOKING_URL = 'https://www.heatherschaeferhq.com/booking-calendar/discovery-call?referral=service_list_widget';
+
+  // Handler para sa CTA button click sa lahat ng 3 results
+  const handleCtaClick = (e) => {
+    if (onCtaClick) {
+      onCtaClick(e);
+    }
+    // Redirects the user directly to the booking calendar
+    window.location.href = BOOKING_URL;
+  };
+
   return (
     <div className="full-result-wrapper">
       {/* Hero Header */}
@@ -47,8 +59,8 @@ export default function BrandFullResult({ leadData, resultBand, insights, onCtaC
           </div>
 
           <div className="cta-block">
-            <button className="brand-btn-primary" onClick={onCtaClick}>
-              {band.fullResult.cta}
+            <button className="brand-btn-primary" onClick={handleCtaClick}>
+              Begin Conversation
             </button>
             <p className="cta-microcopy">{band.fullResult.secondaryMicrocopy}</p>
           </div>
@@ -88,8 +100,8 @@ export default function BrandFullResult({ leadData, resultBand, insights, onCtaC
           </div>
 
           <div className="cta-block">
-            <button className="brand-btn-primary" onClick={onCtaClick}>
-              {band.fullResult.cta}
+            <button className="brand-btn-primary" onClick={handleCtaClick}>
+              Begin Conversation
             </button>
             <p className="cta-microcopy">{band.fullResult.microcopy}</p>
           </div>
@@ -134,10 +146,9 @@ export default function BrandFullResult({ leadData, resultBand, insights, onCtaC
           </div>
 
           <div className="cta-block">
- <button className="brand-btn-primary" onClick={onCtaClick}>
-              {band.fullResult.cta}
+            <button className="brand-btn-primary" onClick={handleCtaClick}>
+              Begin Conversation
             </button>
-
           </div>
         </>
       )}
