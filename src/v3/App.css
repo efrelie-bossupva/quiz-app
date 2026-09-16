@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&display=swap');
 
 :root {
-  /* Global Typography */
   --font-sans: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'Montserrat', sans-serif;
 
-  /* Updated Brand Color Palette */
   --brand-purple: #6A2472;
   --brand-purple-hover: #531c59;
   --brand-magenta: #A51B62;
@@ -13,25 +11,21 @@
   --brand-light-blue: #a0f1ff;
   --brand-light-blue-bg: rgba(160, 241, 255, 0.25);
   
-  /* Retained Variables mapped to new Palette */
   --brand-plum: #6A2472;
   --brand-plum-hover: #531c59;
   --brand-plum-light: rgba(160, 241, 255, 0.2);
 
-  /* Backgrounds & Surfaces */
   --bg-color: #fcfcfd;
   --surface-bg: #ffffff;
   --surface-card: #ffffff;
   --surface-card-hover: rgba(160, 241, 255, 0.15);
   --surface-card-selected: rgba(160, 241, 255, 0.35);
 
-  /* Text & Border Colors */
   --text-primary: #6A2472;
   --text-secondary: #333333;
   --text-muted: #666666;
   --border-color: #a0f1ff;
 
-  /* Radius & Transitions */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
@@ -41,7 +35,6 @@
   --transition-fast: all 0.2s ease;
 }
 
-/* Main Page Container */
 .brand-quiz-container {
   min-height: 100vh;
   width: 100%;
@@ -54,7 +47,6 @@
   padding: 0 20px 60px;
 }
 
-/* Header Bar */
 .brand-top-navbar {
   width: 100%;
   max-width: 800px;
@@ -89,7 +81,20 @@
   margin: 0 auto;
 }
 
-/* Eyebrow Kicker Tag */
+.brand-logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.brand-logo {
+  max-width: 160px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 .brand-kicker {
   font-family: var(--font-sans);
   font-size: 0.8rem;
@@ -100,7 +105,6 @@
   margin-bottom: 12px;
 }
 
-/* Landing Card */
 .brand-landing-card {
   background: var(--surface-bg);
   border: 1px solid var(--border-color);
@@ -142,7 +146,6 @@
   font-weight: 600;
 }
 
-/* Primary Button (Updated to Magenta Accent) */
 .brand-btn-primary {
   display: inline-flex;
   align-items: center;
@@ -175,7 +178,6 @@
   box-shadow: none;
 }
 
-/* Secondary Button (Ghost/Outline) */
 .brand-btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -205,7 +207,6 @@
   margin-top: 14px;
 }
 
-/* Question Screen */
 .quiz-question-card {
   background: var(--surface-bg);
   border: 1px solid var(--border-color);
@@ -311,7 +312,6 @@
   gap: 16px;
 }
 
-/* Result Teaser & Lead Form */
 .result-teaser-card {
   background: var(--surface-bg);
   border: 1px solid var(--border-color);
@@ -426,7 +426,6 @@
   margin-top: 14px;
 }
 
-/* Full Result Page */
 .full-result-wrapper {
   display: flex;
   flex-direction: column;
@@ -549,7 +548,6 @@
   font-style: italic;
 }
 
-/* Heather's Story Section */
 .heathers-story-card {
   background: #ffffff;
   border: 1.5px solid var(--border-color);
@@ -593,7 +591,6 @@
   margin-top: 24px;
 }
 
-/* Personalized Insight Cards */
 .insight-card {
   background: var(--surface-card);
   border: 1px dashed var(--border-color);
@@ -618,7 +615,6 @@
   font-style: italic;
 }
 
-/* CTA Block */
 .cta-block {
   text-align: center;
   background: var(--surface-bg);
@@ -633,7 +629,6 @@
   margin-top: 14px;
 }
 
-/* Animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -645,7 +640,6 @@
   }
 }
 
-/* Responsive Layout */
 @media (max-width: 640px) {
   .brand-quiz-container {
     padding: 0 16px 40px;
@@ -656,6 +650,10 @@
     margin-bottom: 24px;
   }
   
+  .brand-logo {
+    max-width: 130px;
+  }
+
   .brand-main-title {
     font-size: 2rem;
   }
