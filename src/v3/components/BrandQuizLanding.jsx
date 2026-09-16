@@ -1,6 +1,6 @@
 import React from 'react';
 import { QUIZ_METADATA } from '../data/brandQuizData';
-import logoImg from '../../assets/logo.jpg';
+import logoImg from '../../../assets/logo.jpg';
 
 export default function BrandQuizLanding({ onStart }) {
   return (
