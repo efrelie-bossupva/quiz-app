@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './index.css';
 import './App.css';
-import logoImg from '../assets/logo.jpg';
+import logoImg from '../../assets/logo.jpg'; // <-- Updated relative path here
 import {
   QUIZ_METADATA,
   QUIZ_QUESTIONS,
