@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function BrandFullResult({ leadData, resultBand, insights, onCtaClick }) {
+export default function BrandFullResult({ leadData, resultBand, insights }) {
   const firstName = leadData?.firstName || 'Friend';
   const band = resultBand;
   const isStructurallySound = band.title === 'STRUCTURALLY SOUND';
@@ -10,12 +10,9 @@ export default function BrandFullResult({ leadData, resultBand, insights, onCtaC
   // Target booking URL
   const BOOKING_URL = 'https://www.heatherschaeferhq.com/booking-calendar/discovery-call?referral=service_list_widget';
 
-  // Handler para sa CTA button click sa lahat ng 3 results
+  // Handler to bypass any parent popup and redirect directly
   const handleCtaClick = (e) => {
-    if (onCtaClick) {
-      onCtaClick(e);
-    }
-    // Redirects the user directly to the booking calendar
+    e.preventDefault();
     window.location.href = BOOKING_URL;
   };
 
