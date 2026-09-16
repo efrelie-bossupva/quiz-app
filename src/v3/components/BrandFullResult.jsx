@@ -134,16 +134,10 @@ export default function BrandFullResult({ leadData, resultBand, insights, onCtaC
           </div>
 
           <div className="cta-block">
-<button
-  className="brand-btn-primary"
-  onClick={onCtaClick}
-  style={{
-    backgroundColor: '#6a2472',
-    borderRadius: '0px'
-  }}
->
-  {band.fullResult.cta}
-</button>
+ <button className="brand-btn-primary" onClick={onCtaClick}>
+              {band.fullResult.cta}
+            </button>
+
           </div>
         </>
       )}
