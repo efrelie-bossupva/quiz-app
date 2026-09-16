@@ -63,13 +63,17 @@
   align-items: center;
 }
 
-.brand-navbar-logo {
-  height: 65px !important;
+.brand-top-navbar .navbar-brand-name img.brand-navbar-logo {
   width: auto !important;
+  height: 100px !important;
+  min-width: 0 !important;
+  min-height: 100px !important;
   max-width: none !important;
-  object-fit: contain;
-  display: block;
+  max-height: none !important;
+  object-fit: contain !important;
+  display: block !important;
 }
+
 .navbar-brand-tag {
   font-family: var(--font-sans);
   font-size: 0.72rem;
