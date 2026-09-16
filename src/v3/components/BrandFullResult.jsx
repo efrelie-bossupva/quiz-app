@@ -8,7 +8,7 @@ export default function BrandFullResult({ leadData, resultBand, insights }) {
   const isAlreadyBurned = band.title === "IT'S ALREADY BURNED";
 
   // Target booking URL
-  const BOOKING_URL = 'https://www.heatherschaeferhq.com/booking-calendar/discovery-call?referral=service_list_widget';
+  const BOOKING_URL = 'https://www.brandingyoubig.com/booking-calendar/discovery-call?referral=service_list_widget';
 
   // Handler to bypass any parent popup and redirect directly
   const handleCtaClick = (e) => {
