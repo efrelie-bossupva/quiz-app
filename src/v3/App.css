@@ -59,11 +59,15 @@
 }
 
 .navbar-brand-name {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+}
+
+.brand-navbar-logo {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .navbar-brand-tag {
@@ -79,20 +83,6 @@
   width: 100%;
   max-width: 680px;
   margin: 0 auto;
-}
-
-.brand-logo-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.brand-logo {
-  max-width: 114px; 
-  height: auto;
-  object-fit: contain;
-  display: block;
 }
 
 .brand-kicker {
@@ -649,9 +639,9 @@
     padding: 18px 0 14px;
     margin-bottom: 24px;
   }
-  
-  .brand-logo {
-    max-width: 130px;
+
+  .brand-navbar-logo {
+    height: 32px;
   }
 
   .brand-main-title {
