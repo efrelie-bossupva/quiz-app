@@ -1,14 +1,9 @@
 import React from 'react';
 import { QUIZ_METADATA } from '../data/brandQuizData';
-import logoImg from '../../../assets/logo.jpg';
 
 export default function BrandQuizLanding({ onStart }) {
   return (
     <div className="brand-landing-card">
-      <div className="brand-logo-container">
-        <img src={logoImg} alt="Brand Logo" className="brand-logo" />
-      </div>
-
       <div className="brand-kicker">{QUIZ_METADATA.badge}</div>
       <h1 className="brand-main-title">{QUIZ_METADATA.title}</h1>
       <p className="brand-landing-subtitle">{QUIZ_METADATA.subtitle}</p>
