@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './index.css';
 import './App.css';
+import logoImg from '../assets/logo.jpg';
 import {
   QUIZ_METADATA,
   QUIZ_QUESTIONS,
@@ -176,7 +177,9 @@ export default function AppV3() {
     <div className="brand-quiz-container">
       {/* Top Navbar */}
       <nav className="brand-top-navbar">
-        <span className="navbar-brand-name">Heather Schaefer</span>
+        <div className="navbar-brand-name">
+          <img src={logoImg} alt="Heather Schaefer" className="brand-navbar-logo" />
+        </div>
         <span className="navbar-brand-tag">BRANDING YOU BIG</span>
       </nav>
 
