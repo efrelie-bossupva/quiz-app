@@ -36,14 +36,19 @@ function App() {
   const handleLeadFormSubmit = async (formData) => {
     const totalScore = answers.reduce((sum, a) => sum + a.score, 0);
 
+    const resultBand = resultBands.find(
+      band => totalScore >= band.min && totalScore <= band.max
+    ) || resultBands[2];
+
     const record = {
       first_name: formData.firstName,
       last_name: formData.lastName,
       email: formData.email,
       phone: formData.phone,
       score: totalScore,
+      quiz_tag: resultBand.tag || resultBand.title,
       answers: [
-        { quiz_tag: 'quiz-1' },
+        { quiz_tag: 'quiz-1', result_tag: resultBand.tag || resultBand.title },
         ...answers.map(a => ({
           question_id: a.questionId,
           question: a.questionText,

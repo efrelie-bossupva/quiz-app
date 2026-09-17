@@ -72,6 +72,7 @@ export const resultBands = [
     min: 75,
     max: 100,
     title: "HEALTHY HOME",
+    tag: "HEALTHY HOME",
     message: "You’re on top of your home. A few small improvements could make ownership even easier.",
     color: "var(--success-color)"
   },
@@ -79,6 +80,7 @@ export const resultBands = [
     min: 50,
     max: 74,
     title: "NEEDS ATTENTION",
+    tag: "NEEDS ATTENTION",
     message: "Your home has some areas of exposure that are worth getting ahead of.",
     color: "var(--warning-color)"
   },
@@ -86,6 +88,7 @@ export const resultBands = [
     min: 0,
     max: 49,
     title: "AT RISK",
+    tag: "AT RISK",
     message: "Your home may be one unexpected repair away from a costly headache. Let’s get ahead of it.",
     color: "var(--danger-color)"
   }

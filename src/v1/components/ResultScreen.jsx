@@ -46,6 +46,9 @@ export default function ResultScreen({ score, resultBand, lowestScoringAnswers }
         <h2 className="result-title" style={{ color: resultBand.color }}>
           {resultBand.title}
         </h2>
+        <div className="result-band-tag" style={{ backgroundColor: resultBand.color }}>
+          {resultBand.title}
+        </div>
         <p className="result-message">{resultBand.message}</p>
       </div>
 
@@ -103,7 +106,7 @@ export default function ResultScreen({ score, resultBand, lowestScoringAnswers }
           Let a Homeowners Hub professional help you identify what deserves attention now, what can wait, and how to stay ahead of expensive home surprises.
         </p>
         
-        <button className="book-button" onClick={() => window.location.reload()}>
+        <button className="book-button" onClick={() => window.open('https://link.homeowners.casa/widget/booking/vLvz363wSwQEqwBe2v6B', '_blank')}>
           <Calendar size={18} />
           Book My Free Home Health Check-Up →
         </button>
