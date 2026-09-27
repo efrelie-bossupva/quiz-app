@@ -1,22 +1,34 @@
+
 import React, { useState } from 'react';
 
 export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitting }) {
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [businessName, setBusinessName] = useState('');
   const [websiteUrl, setWebsiteUrl] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!firstName.trim() || !email.trim() || !businessName.trim() || !websiteUrl.trim()) {
+
+    if (
+      !firstName.trim() ||
+      !email.trim() ||
+      !phone.trim() ||
+      !businessName.trim() ||
+      !websiteUrl.trim()
+    ) {
       setErrorMsg('Please fill in all required fields to view your full result.');
       return;
     }
+
     setErrorMsg('');
+
     onSubmitLead({
       firstName: firstName.trim(),
       email: email.trim(),
+      phone: phone.trim(),
       businessName: businessName.trim(),
       websiteUrl: websiteUrl.trim()
     });
@@ -35,19 +47,32 @@ export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitti
 
       <div className="lead-form-box">
         <h3 className="lead-form-title">Want the full read?</h3>
+
         <p className="lead-form-subtitle">
-          Enter your information and we'll send you exactly what your result means — and what to pay attention to next.
+          Enter your information and we'll send you exactly what your result means —
+          and what to pay attention to next.
         </p>
 
         {errorMsg && (
-          <div style={{ color: '#ef4444', fontSize: '0.85rem', marginBottom: '16px' }}>
+          <div
+            style={{
+              color: '#ef4444',
+              fontSize: '0.85rem',
+              marginBottom: '16px'
+            }}
+          >
             {errorMsg}
           </div>
         )}
 
         <form onSubmit={handleSubmit}>
+
+          {/* FIRST NAME */}
           <div className="form-group">
-            <label className="form-label" htmlFor="firstName">First Name *</label>
+            <label className="form-label" htmlFor="firstName">
+              First Name *
+            </label>
+
             <input
               id="firstName"
               type="text"
@@ -59,8 +84,12 @@ export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitti
             />
           </div>
 
+          {/* EMAIL */}
           <div className="form-group">
-            <label className="form-label" htmlFor="email">Email Address *</label>
+            <label className="form-label" htmlFor="email">
+              Email Address *
+            </label>
+
             <input
               id="email"
               type="email"
@@ -72,8 +101,30 @@ export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitti
             />
           </div>
 
+          {/* PHONE */}
           <div className="form-group">
-            <label className="form-label" htmlFor="businessName">Business Name *</label>
+            <label className="form-label" htmlFor="phone">
+              Phone Number *
+            </label>
+
+            <input
+              id="phone"
+              type="tel"
+              className="form-input"
+              placeholder="e.g. +1 555 123 4567"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+              autoComplete="tel"
+            />
+          </div>
+
+          {/* BUSINESS NAME */}
+          <div className="form-group">
+            <label className="form-label" htmlFor="businessName">
+              Business Name *
+            </label>
+
             <input
               id="businessName"
               type="text"
@@ -85,8 +136,12 @@ export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitti
             />
           </div>
 
+          {/* WEBSITE URL */}
           <div className="form-group">
-            <label className="form-label" htmlFor="websiteUrl">Website URL *</label>
+            <label className="form-label" htmlFor="websiteUrl">
+              Website URL *
+            </label>
+
             <input
               id="websiteUrl"
               type="text"
@@ -96,18 +151,23 @@ export default function BrandResultTeaser({ resultBand, onSubmitLead, isSubmitti
               onChange={(e) => setWebsiteUrl(e.target.value)}
               required
             />
+
             <span className="form-field-microcopy">
-              Heather reviews this before conversations so she can see what your prospects are seeing.
+              Heather reviews this before conversations so she can see what your
+              prospects are seeing.
             </span>
           </div>
 
+          {/* SUBMIT */}
           <button
             type="submit"
             className="brand-btn-primary"
             style={{ marginTop: '12px' }}
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'PREPARING YOUR FULL RESULT...' : 'SEND ME MY FULL RESULT'}
+            {isSubmitting
+              ? 'PREPARING YOUR FULL RESULT...'
+              : 'SEND ME MY FULL RESULT'}
           </button>
         </form>
 
