@@ -82,26 +82,27 @@ export default function AppV3() {
 
     const highestConcernSummary = generateHighestConcernSummary(answers);
 
-    const payload = {
-      quiz_name: QUIZ_METADATA.name,
-      first_name: formData.firstName,
-      email: formData.email,
-      business_name: formData.businessName,
-      website_url: formData.websiteUrl,
-      quiz_total_score: totalScore,
-      quiz_result_band: resultBand.title,
-      tag: resultBand.tag,
-      quiz_tag: resultBand.tag,
-      highest_concern_summary: highestConcernSummary,
-      q1_inquiries: answers.q1_inquiries ?? 0,
-      q2_ai: answers.q2_ai ?? 0,
-      q3_positioning_age: answers.q3_positioning_age ?? 0,
-      q4_brand_relevance: answers.q4_brand_relevance ?? 0,
-      q5_pricing: answers.q5_pricing ?? 0,
-      q6_client_sources: answers.q6_client_sources ?? 0,
-      q7_website_confidence: answers.q7_website_confidence ?? 0,
-      created_at: new Date().toISOString()
-    };
+const payload = {
+  quiz_name: QUIZ_METADATA.name,
+  first_name: formData.firstName,
+  email: formData.email,
+  phone: formData.phone,
+  business_name: formData.businessName,
+  website_url: formData.websiteUrl,
+  quiz_total_score: totalScore,
+  quiz_result_band: resultBand.title,
+  tag: resultBand.tag,
+  quiz_tag: resultBand.tag,
+  highest_concern_summary: highestConcernSummary,
+  q1_inquiries: answers.q1_inquiries ?? 0,
+  q2_ai: answers.q2_ai ?? 0,
+  q3_positioning_age: answers.q3_positioning_age ?? 0,
+  q4_brand_relevance: answers.q4_brand_relevance ?? 0,
+  q5_pricing: answers.q5_pricing ?? 0,
+  q6_client_sources: answers.q6_client_sources ?? 0,
+  q7_website_confidence: answers.q7_website_confidence ?? 0,
+  created_at: new Date().toISOString()
+};
 
     console.log('[GHL Payload Ready]', payload);
 
