@@ -112,7 +112,7 @@ const payload = {
         first_name: formData.firstName,
         last_name: '',
         email: formData.email,
-        phone: '',
+        phone: formData.phone,
         business_name: formData.businessName,
         website_url: formData.websiteUrl,
         score: totalScore,
