@@ -168,7 +168,7 @@ export default function ResultScreen({ results, answers, onRestart }) {
           </div>
 
           <button type="submit" className="v4-send-tam-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Submit'}
+            {isSubmitting ? 'Sending...' : 'Send it to Tam'}
           </button>
         </form>
       ) : (
@@ -190,7 +190,7 @@ export default function ResultScreen({ results, answers, onRestart }) {
         <span className="v4-secondary-link-text">
           Not ready to write? Read the chapter on this:{' '}
           <a
-            href="https://bossupva.com"
+            href="https://bossupva.com/beyond-the-hustle-book"
             target="_blank"
             rel="noopener noreferrer"
             className="v4-secondary-link"
