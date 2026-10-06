@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { quizMeta } from '../data/quizData';
 
 export default function ResultScreen({
@@ -12,6 +12,19 @@ export default function ResultScreen({
   const [sentence, setSentence] = useState(initialSentence || '');
   const [error, setError] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+
+  const toastRef = useRef(null);
+
+  useEffect(() => {
+    if (submitted && showToast) {
+      setTimeout(() => {
+        if (toastRef.current) {
+          toastRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+    }
+  }, [submitted, showToast]);
 
   const handleNext = (e) => {
     e.preventDefault();
@@ -33,6 +46,7 @@ export default function ResultScreen({
 
     // Mark final submission as complete
     setSubmitted(true);
+    setShowToast(true);
 
     // Send sentence back to App.jsx
     if (typeof onProceed === 'function') {
@@ -62,22 +76,7 @@ export default function ResultScreen({
         />
       </div>
 
-      {/* =========================
-          ARCHETYPE HEADLINE
-      ========================== */}
-      <div className="v4-archetype-headline-box">
-        <h2 className="v4-archetype-headline">
-          {archetype?.headline}
-        </h2>
-      </div>
 
-      {/* =========================
-          CONTEXT LINE
-      ========================== */}
-      <p className="v4-context-line">
-        That's where you are. Put your information and I’ll tell
-        you what’s your next step to find your client.
-      </p>
 
       {/* =========================
           GAP BOX
@@ -186,32 +185,56 @@ export default function ResultScreen({
         </button>
 
         {/* =========================
+            SUCCESS TOAST NOTIFICATION
+        ========================== */}
+        {submitted && showToast && (
+          <div ref={toastRef} className="v4-toast-notification" role="alert">
+            <svg
+              className="v4-toast-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+            <p className="v4-toast-message">
+              Your answer has been submitted successfully.
+            </p>
+            <button
+              type="button"
+              className="v4-toast-close"
+              onClick={() => setShowToast(false)}
+              aria-label="Close notification"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        )}
+
+        {/* =========================
             WHAT HAPPENS NEXT
         ========================== */}
         <p className="v4-what-happens-next">
           I read these myself. You'll hear back from me directly
-          and what's your next step.
+          and I'll tell you what's your next step to find your client.
         </p>
-
-        {/* =========================
-            SUCCESS MESSAGE
-        ========================== */}
-        {submitted && (
-          <div
-            style={{
-              marginTop: '16px',
-              padding: '14px 16px',
-              borderRadius: '8px',
-              backgroundColor: '#F4F9F5',
-              border: '1px solid #D1E7DD',
-              color: '#0F5132',
-              textAlign: 'center',
-              fontSize: '14px'
-            }}
-          >
-            Your answer has been submitted successfully.
-          </div>
-        )}
       </form>
 
       {/* =========================

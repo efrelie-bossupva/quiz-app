@@ -552,3 +552,73 @@
 .v4-retake-btn:hover {
   color: #666;
 }
+
+/* ==========================================
+   Toast Notification (Under Button Slider)
+   ========================================== */
+@keyframes v4SlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.v4-toast-notification {
+  position: relative;
+  top: auto;
+  right: auto;
+  z-index: 10;
+  margin-top: 8px;
+  background-color: #ffffff;
+  border: 1px solid #D1E7DD;
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  animation: v4SlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-sizing: border-box;
+}
+
+.v4-toast-icon {
+  width: 22px;
+  height: 22px;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.v4-toast-message {
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  flex: 1;
+}
+
+.v4-toast-close {
+  background: none;
+  border: none;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.v4-toast-close:hover {
+  color: #374151;
+  background-color: #f3f4f6;
+}
+
