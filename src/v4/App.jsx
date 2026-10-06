@@ -1,3 +1,4 @@
+```jsx
 import React, { useState } from 'react';
 import './App.css';
 import { questions, calculateQuizResults } from './data/quizData';
@@ -7,7 +8,7 @@ import ResultScreen from './components/ResultScreen';
 import LeadCaptureScreen from './components/LeadCaptureScreen';
 
 export default function App() {
-  // Screen state: 'hero' | 'question' | 'result' | 'lead'
+  // Screen state: 'hero' | 'question' | 'lead' | 'result'
   const [screen, setScreen] = useState('hero');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -17,6 +18,9 @@ export default function App() {
   const handleStart = () => {
     setScreen('question');
     setCurrentIndex(0);
+    setAnswers({});
+    setQuizResults(null);
+    setTriedSentence('');
   };
 
   const handleSelectOption = (option) => {
@@ -30,11 +34,12 @@ export default function App() {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
-      // Calculate final outputs
+      // Calculate final quiz results
       const res = calculateQuizResults(answers);
       setQuizResults(res);
-      // FIRST: Show diagnostic results breakdown & sentence input box
-      setScreen('result');
+
+      // FIRST: Go directly to Lead Capture Screen
+      setScreen('lead');
     }
   };
 
@@ -46,14 +51,20 @@ export default function App() {
     }
   };
 
-  const handleProceedToForm = (sentence) => {
+  const handleProceedToResult = (sentence) => {
     setTriedSentence(sentence);
-    // SECOND: Proceed to the form screen (Name & Email + Send it to Tam button)
-    setScreen('lead');
+
+    // SECOND: After Lead Capture, show the results
+    setScreen('result');
   };
 
-  const handleBackToResult = () => {
-    setScreen('result');
+  const handleBackToQuestions = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+      setScreen('question');
+    } else {
+      setScreen('hero');
+    }
   };
 
   const handleRestart = () => {
@@ -67,8 +78,13 @@ export default function App() {
   return (
     <div className="v4-wrapper">
       <div className="v4-quiz-box">
-        {screen === 'hero' && <HeroScreen onStart={handleStart} />}
 
+        {/* HERO */}
+        {screen === 'hero' && (
+          <HeroScreen onStart={handleStart} />
+        )}
+
+        {/* QUESTIONS */}
         {screen === 'question' && (
           <QuestionScreen
             question={questions[currentIndex]}
@@ -81,24 +97,29 @@ export default function App() {
           />
         )}
 
-        {screen === 'result' && quizResults && (
-          <ResultScreen
-            results={quizResults}
-            initialSentence={triedSentence}
-            onProceed={handleProceedToForm}
-          />
-        )}
-
+        {/* LEAD CAPTURE */}
         {screen === 'lead' && quizResults && (
           <LeadCaptureScreen
             results={quizResults}
             answers={answers}
             triedSentence={triedSentence}
+            onProceed={handleProceedToResult}
             onRestart={handleRestart}
-            onBack={handleBackToResult}
+            onBack={handleBackToQuestions}
           />
         )}
+
+        {/* RESULTS */}
+        {screen === 'result' && quizResults && (
+          <ResultScreen
+            results={quizResults}
+            initialSentence={triedSentence}
+            onProceed={handleProceedToResult}
+          />
+        )}
+
       </div>
     </div>
   );
 }
+```
