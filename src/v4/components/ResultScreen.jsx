@@ -4,7 +4,8 @@ import { quizMeta } from '../data/quizData';
 export default function ResultScreen({
   results,
   initialSentence,
-  onProceed
+  onProceed,
+  onRestart
 }) {
   const { archetype, weakestEngine, showDealFlowLine } = results || {};
 
@@ -83,7 +84,7 @@ export default function ResultScreen({
       ========================== */}
       <div className="v4-gap-box">
         <div className="v4-gap-title">
-          {weakestEngine?.title} Gap
+          {weakestEngine?.badgeTitle || `${weakestEngine?.title} GAP`}
         </div>
 
         <p className="v4-gap-text">
@@ -163,8 +164,8 @@ export default function ResultScreen({
         >
           <span>
             {submitted
-              ? 'Submitted!'
-              : 'Submit Answer & Continue'}
+              ? 'Sent!'
+              : 'Send it to Tam'}
           </span>
 
           {!submitted && (
@@ -183,6 +184,14 @@ export default function ResultScreen({
             </svg>
           )}
         </button>
+
+        {/* =========================
+            WHAT HAPPENS NEXT
+        ========================== */}
+        <p className="v4-what-happens-next">
+          I read these myself. You'll hear back from me directly
+          and what's your next step.
+        </p>
 
         {/* =========================
             SUCCESS MESSAGE
@@ -204,6 +213,39 @@ export default function ResultScreen({
           </div>
         )}
       </form>
+
+      {/* =========================
+          SECONDARY LINK
+      ========================== */}
+      <div className="v4-secondary-link-wrap">
+        <span className="v4-secondary-link-text">
+          Not ready to write? Read the chapter on this:{' '}
+          <a
+            href={quizMeta.chapterUrl || '#'}
+            className="v4-secondary-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Beyond Hustle, Chapter 9
+          </a>
+        </span>
+      </div>
+
+      {/* =========================
+          RETAKE
+      ========================== */}
+      {typeof onRestart === 'function' && (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <button
+            type="button"
+            id="v4-retake-btn"
+            className="v4-retake-btn"
+            onClick={onRestart}
+          >
+            Retake Diagnostic
+          </button>
+        </div>
+      )}
 
     </div>
   );

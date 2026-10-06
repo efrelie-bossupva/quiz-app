@@ -5,7 +5,9 @@ export const quizMeta = {
   metaText: "9 questions. 4 minutes.",
   description: "This quiz will reveal your business stage, where you're stuck, and what needs to change.",
   logoUrl: "https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/763Ziu1WjXtalReMr0YY/media/698ac601a41b87882e36368e.png",
-  heroImageUrl: "https://assets.cdn.filesafe.space/bKVt6IBff7ilk4bzve8Q/media/6a0f16a1a33d272edaa8e398.png"
+  heroImageUrl: "https://assets.cdn.filesafe.space/bKVt6IBff7ilk4bzve8Q/media/6a0f16a1a33d272edaa8e398.png",
+  // TODO: set the real link to "Beyond Hustle, Chapter 9"
+  chapterUrl: ""
 };
 
 export const questions = [
@@ -141,14 +143,17 @@ export const archetypes = {
 export const engineDetails = {
   KNOWN_FOR: {
     title: "Known-For",
+    badgeTitle: "KNOWN-FOR GAP",
     text: "Your known-for is the gap. You can describe what you do — your clients describe it differently. Until the market says one thing about you, nothing downstream compounds: ads accelerate the confusion, referrals stay random, and every conversation starts from scratch."
   },
   REACTIVATE: {
     title: "Reactivate",
+    badgeTitle: "REACTIVATE GAP",
     text: "Reactivation is your gap. The people most likely to buy from you already know you — and they only hear from you when you remember. That is not a list problem. It is the absence of a schedule somebody owns."
   },
   BORROW: {
     title: "Borrow",
+    badgeTitle: "BORROW GAP",
     text: "Borrowed trust is your gap. You're building on your own audience only, which means your growth is capped at the speed you can grow it. The women ahead of you are in front of somebody else's room every week, on purpose, booked in advance."
   }
 };
@@ -173,30 +178,29 @@ export function calculateQuizResults(answers) {
   }
 
   // 2. Engine Scores (Q1 - Q4)
-  const reactivateScore = answers[1]?.score ?? 0; // max 3
-  const borrowScore = answers[2]?.score ?? 0;     // max 3
-  const knownForScore = (answers[3]?.score ?? 0) + (answers[4]?.score ?? 0); // max 6
+  // Each engine has a target score (from the scoring sheet):
+  //   Known-For  = Q3 + Q4 → 6
+  //   Reactivate = Q1      → 3
+  //   Borrow     = Q2      → 3
+  // The engine that hits its target score is the gap shown.
+  // Listed in tie order: Known-For beats Reactivate beats Borrow.
+  const engines = [
+    { key: "KNOWN_FOR",  score: (answers[3]?.score ?? 0) + (answers[4]?.score ?? 0), target: 6 },
+    { key: "REACTIVATE", score: answers[1]?.score ?? 0, target: 3 },
+    { key: "BORROW",     score: answers[2]?.score ?? 0, target: 3 }
+  ];
 
-  // Ratios out of 1.0 to find lowest engine score
-  const knownForRatio = knownForScore / 6;
-  const reactivateRatio = reactivateScore / 3;
-  const borrowRatio = borrowScore / 3;
+  // First engine (in tie order) that reaches its target score
+  let selected = engines.find((e) => e.score >= e.target);
 
-  // Tie-breaker rule: Known-For beats Reactivate beats Borrow (i.e. Known-For is highest priority if tied)
-  let weakestEngineKey = "KNOWN_FOR";
-  let minRatio = knownForRatio;
-
-  if (reactivateRatio < minRatio) {
-    minRatio = reactivateRatio;
-    weakestEngineKey = "REACTIVATE";
+  // Fallback if no engine hits its target: closest to its target (tie order kept)
+  if (!selected) {
+    selected = engines.reduce((best, e) =>
+      e.score / e.target > best.score / best.target ? e : best
+    );
   }
 
-  if (borrowRatio < minRatio) {
-    minRatio = borrowRatio;
-    weakestEngineKey = "BORROW";
-  }
-
-  const weakestEngine = engineDetails[weakestEngineKey];
+  const weakestEngine = engineDetails[selected.key];
 
   // 3. Deal flow conditional line (Q5 answered c or d)
   const q5Key = answers[5]?.key;

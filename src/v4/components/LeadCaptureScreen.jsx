@@ -33,7 +33,7 @@ export default function LeadCaptureScreen({
     try {
       const archetypeName = archetype?.name || 'Operator';
       const engineTitle = weakestEngine?.title || 'Known-For';
-      const fullQuizTag = `${archetypeName} - ${engineTitle} Gap`;
+      const fullQuizTag = `${archetypeName} - ${engineTitle}`;
 
       const nameParts = name.trim().split(/\s+/);
 
