@@ -112,7 +112,7 @@ export default function LeadCaptureScreen({ results, answers, triedSentence, onR
             {archetype?.headline || "You're a Hustler. The business is you, and right now that's the whole ceiling."}
           </h1>
           <p style={{ fontSize: '16px', color: '#88827A', margin: 0, fontWeight: 400 }}>
-            That's where you are. Here's what's actually holding it there.
+            That's where you are. Put your information and I’ll tell you what’s your next step to find your client. 
           </p>
         </div>
 
