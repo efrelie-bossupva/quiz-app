@@ -33,7 +33,8 @@ export default function ResultScreen({ results, initialSentence, onProceed }) {
 
       {/* Order 2: One line of context */}
       <p className="v4-context-line">
-        That's where you are. Here's what's actually holding it there.
+        That's where you are. Put your information and I’ll tell you what’s your next step to find your client. 
+
       </p>
 
       {/* Order 3: The gap box — real result */}
