@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import './App.css';
 import { questions, calculateQuizResults } from './data/quizData';
@@ -8,8 +7,10 @@ import ResultScreen from './components/ResultScreen';
 import LeadCaptureScreen from './components/LeadCaptureScreen';
 
 export default function App() {
-  // Screen state: 'hero' | 'question' | 'lead' | 'result'
+  // Screen flow:
+  // 'hero' → 'question' → 'lead' → 'result'
   const [screen, setScreen] = useState('hero');
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [quizResults, setQuizResults] = useState(null);
@@ -18,53 +19,45 @@ export default function App() {
   const handleStart = () => {
     setScreen('question');
     setCurrentIndex(0);
-    setAnswers({});
-    setQuizResults(null);
-    setTriedSentence('');
   };
 
   const handleSelectOption = (option) => {
-    setAnswers({
-      ...answers,
+    setAnswers((prev) => ({
+      ...prev,
       [questions[currentIndex].id]: option
-    });
+    }));
   };
 
   const handleNextQuestion = () => {
     if (currentIndex < questions.length - 1) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex((prev) => prev + 1);
     } else {
-      // Calculate final quiz results
+      // Calculate results after the last quiz question
       const res = calculateQuizResults(answers);
+
       setQuizResults(res);
 
-      // FIRST: Go directly to Lead Capture Screen
+      // IMPORTANT:
+      // Do NOT show ResultScreen yet.
+      // Show LeadCaptureScreen first.
       setScreen('lead');
     }
   };
 
   const handleBackQuestion = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex((prev) => prev - 1);
     } else {
       setScreen('hero');
     }
   };
 
-  const handleProceedToResult = (sentence) => {
+  // This is called AFTER LeadCaptureScreen is submitted
+  const handleLeadSubmit = (sentence = '') => {
     setTriedSentence(sentence);
 
-    // SECOND: After Lead Capture, show the results
+    // Now move to the ResultScreen
     setScreen('result');
-  };
-
-  const handleBackToQuestions = () => {
-    if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      setScreen('question');
-    } else {
-      setScreen('hero');
-    }
   };
 
   const handleRestart = () => {
@@ -79,12 +72,18 @@ export default function App() {
     <div className="v4-wrapper">
       <div className="v4-quiz-box">
 
-        {/* HERO */}
+        {/* =========================
+            HERO
+        ========================== */}
         {screen === 'hero' && (
-          <HeroScreen onStart={handleStart} />
+          <HeroScreen
+            onStart={handleStart}
+          />
         )}
 
-        {/* QUESTIONS */}
+        {/* =========================
+            QUIZ QUESTIONS
+        ========================== */}
         {screen === 'question' && (
           <QuestionScreen
             question={questions[currentIndex]}
@@ -97,24 +96,27 @@ export default function App() {
           />
         )}
 
-        {/* LEAD CAPTURE */}
+        {/* =========================
+            LEAD CAPTURE
+        ========================== */}
         {screen === 'lead' && quizResults && (
           <LeadCaptureScreen
             results={quizResults}
             answers={answers}
             triedSentence={triedSentence}
-            onProceed={handleProceedToResult}
+            onSubmit={handleLeadSubmit}
             onRestart={handleRestart}
-            onBack={handleBackToQuestions}
           />
         )}
 
-        {/* RESULTS */}
+        {/* =========================
+            RESULT
+        ========================== */}
         {screen === 'result' && quizResults && (
           <ResultScreen
             results={quizResults}
             initialSentence={triedSentence}
-            onProceed={handleProceedToResult}
+            onRestart={handleRestart}
           />
         )}
 
@@ -122,4 +124,3 @@ export default function App() {
     </div>
   );
 }
-
