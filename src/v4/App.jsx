@@ -7,8 +7,10 @@ import ResultScreen from './components/ResultScreen';
 import LeadCaptureScreen from './components/LeadCaptureScreen';
 
 export default function App() {
-  // Screen flow:
-  // 'hero' → 'question' → 'lead' → 'result'
+  // ==========================================
+  // SCREEN FLOW
+  // hero → question → lead → result
+  // ==========================================
   const [screen, setScreen] = useState('hero');
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,11 +18,17 @@ export default function App() {
   const [quizResults, setQuizResults] = useState(null);
   const [triedSentence, setTriedSentence] = useState('');
 
+  // ==========================================
+  // START QUIZ
+  // ==========================================
   const handleStart = () => {
     setScreen('question');
     setCurrentIndex(0);
   };
 
+  // ==========================================
+  // SELECT ANSWER
+  // ==========================================
   const handleSelectOption = (option) => {
     setAnswers((prev) => ({
       ...prev,
@@ -28,6 +36,9 @@ export default function App() {
     }));
   };
 
+  // ==========================================
+  // NEXT QUESTION
+  // ==========================================
   const handleNextQuestion = () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
@@ -44,6 +55,9 @@ export default function App() {
     }
   };
 
+  // ==========================================
+  // BACK QUESTION
+  // ==========================================
   const handleBackQuestion = () => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1);
@@ -52,14 +66,40 @@ export default function App() {
     }
   };
 
-  // This is called AFTER LeadCaptureScreen is submitted
-  const handleLeadSubmit = (sentence = '') => {
-    setTriedSentence(sentence);
-
-    // Now move to the ResultScreen
+  // ==========================================
+  // LEAD CAPTURE SUBMITTED
+  // ==========================================
+  // This runs after Name + Email are successfully
+  // submitted from LeadCaptureScreen.
+  //
+  // It moves the user to the ResultScreen.
+  // ==========================================
+  const handleLeadSubmit = () => {
     setScreen('result');
   };
 
+  // ==========================================
+  // FINAL RESULT SCREEN SUBMIT
+  // ==========================================
+  // This is called when the user clicks:
+  //
+  // "Submit Answer & Continue"
+  //
+  // This is the FINAL submission.
+  // There is no additional screen after this.
+  // ==========================================
+  const handleFinalSubmit = (sentence = '') => {
+    setTriedSentence(sentence);
+
+    console.log('Final answer submitted:', sentence);
+
+    // Final submission is complete.
+    // Stay on the ResultScreen.
+  };
+
+  // ==========================================
+  // RESTART QUIZ
+  // ==========================================
   const handleRestart = () => {
     setScreen('hero');
     setCurrentIndex(0);
@@ -116,6 +156,7 @@ export default function App() {
           <ResultScreen
             results={quizResults}
             initialSentence={triedSentence}
+            onProceed={handleFinalSubmit}
             onRestart={handleRestart}
           />
         )}
