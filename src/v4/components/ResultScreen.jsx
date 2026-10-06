@@ -1,86 +1,18 @@
 import React, { useState } from 'react';
 import { quizMeta } from '../data/quizData';
-import { supabase } from '../../lib/supabase';
 
-export default function ResultScreen({ results, answers, onRestart }) {
-  const { archetype, structuralScore, weakestEngine, showDealFlowLine } = results;
-
-  const [triedSentence, setTriedSentence] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+export default function ResultScreen({ results, initialSentence, onProceed }) {
+  const { archetype, weakestEngine, showDealFlowLine } = results;
+  const [sentence, setSentence] = useState(initialSentence || '');
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleNext = (e) => {
     e.preventDefault();
-    if (!triedSentence.trim() || !name.trim() || !email.trim()) {
-      setError('Please fill out all fields before sending.');
+    if (!sentence.trim()) {
+      setError('Please fill in what you have tried before proceeding.');
       return;
     }
-    setIsSubmitting(true);
-    try {
-      const archetypeTag = (archetype?.name || 'OPERATOR').toUpperCase();
-      const nameParts = name.trim().split(' ');
-      const firstName = nameParts[0] || name.trim();
-      const lastName = nameParts.length > 1 ? nameParts.slice(1).join(' ') : '';
-
-      const record = {
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        phone: '',
-        quiz_tag: archetypeTag,
-        score: structuralScore,
-        answers: [
-          {
-            quiz_tag: archetypeTag,
-            result_tag: archetypeTag,
-            full_name: name,
-            type: 'feedback_sentence',
-            question: "Tell me in one sentence what you've already tried.",
-            answer: triedSentence
-          },
-          {
-            type: 'archetype',
-            name: archetypeTag,
-            headline: archetype.headline,
-            score: structuralScore
-          },
-          {
-            type: 'weakest_engine',
-            title: weakestEngine.title,
-            text: weakestEngine.text
-          },
-          ...(answers ? Object.entries(answers).map(([qId, ans]) => ({
-            question_id: qId,
-            answer: ans.label,
-            score: ans.score
-          })) : [])
-        ]
-      };
-
-      let { error: dbError } = await supabase.from('quiz_submissions').insert([record]);
-      if (dbError) {
-        console.warn('Primary Supabase insertion notice:', dbError.message);
-        // Fallback without top-level quiz_tag column if table has custom column layout
-        const fallbackRecord = { ...record };
-        delete fallbackRecord.quiz_tag;
-        const { error: fallbackErr } = await supabase.from('quiz_submissions').insert([fallbackRecord]);
-        if (fallbackErr) {
-          console.error('Fallback Supabase insertion error:', fallbackErr.message);
-        } else {
-          console.log('Successfully saved to Supabase quiz_submissions!');
-        }
-      } else {
-        console.log('Successfully saved to Supabase quiz_submissions with quiz_tag:', archetypeTag);
-      }
-    } catch (err) {
-      console.error('Error saving quiz submission:', err);
-    } finally {
-      setIsSubmitting(false);
-      setSubmitted(true);
-    }
+    onProceed(sentence);
   };
 
   return (
@@ -104,13 +36,13 @@ export default function ResultScreen({ results, answers, onRestart }) {
         That's where you are. Here's what's actually holding it there.
       </p>
 
-      {/* Order 3: The gap — this is the real result (Bigger and Bolder) */}
+      {/* Order 3: The gap box — real result */}
       <div className="v4-gap-box">
         <div className="v4-gap-title">{weakestEngine.title} Gap</div>
         <p className="v4-gap-text">{weakestEngine.text}</p>
       </div>
 
-      {/* Order 4: Deal-flow line (conditional) */}
+      {/* Order 4: Deal-flow line */}
       {showDealFlowLine && (
         <p className="v4-deal-flow-line">
           And right now you can't reliably say where the next client comes from. That's what a missing engine looks like from the inside.
@@ -119,92 +51,56 @@ export default function ResultScreen({ results, answers, onRestart }) {
 
       <hr className="v4-divider" />
 
-      {/* Order 5: THE ASK — one question, one reply box */}
-      {!submitted ? (
-        <form onSubmit={handleSubmit} className="v4-reply-box-form">
-          <h3 className="v4-ask-headline">
-            Tell me in one sentence what you've already tried.
-          </h3>
+      {/* Order 5: Tell me in one sentence textarea */}
+      <form onSubmit={handleNext} className="v4-reply-box-form">
+        <h3 className="v4-ask-headline">
+          Tell me in one sentence what you've already tried.
+        </h3>
 
-          {error && <div className="v4-form-error">{error}</div>}
+        {error && <div className="v4-form-error">{error}</div>}
 
-          <div className="v4-form-group">
-            <textarea
-              className="v4-textarea"
-              rows={3}
-              placeholder="In one sentence, what have you tried so far?"
-              value={triedSentence}
-              onChange={(e) => setTriedSentence(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="v4-form-row">
-            <div className="v4-form-group" style={{ flex: 1 }}>
-              <label className="v4-field-label">Your Name *</label>
-              <input
-                type="text"
-                className="v4-text-input"
-                style={{ paddingLeft: '14px' }}
-                placeholder="First & Last Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="v4-form-group" style={{ flex: 1 }}>
-              <label className="v4-field-label">Your Email *</label>
-              <input
-                type="email"
-                className="v4-text-input"
-                style={{ paddingLeft: '14px' }}
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-
-          <button type="submit" className="v4-send-tam-btn" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send it to Tam'}
-          </button>
-        </form>
-      ) : (
-        <div className="v4-thank-you-card">
-          <div className="v4-thank-you-title">Submitted!</div>
-          <p className="v4-thank-you-desc">
-            Your response has been successfully submitted.
-          </p>
+        <div className="v4-form-group">
+          <textarea
+            className="v4-textarea"
+            rows={3}
+            placeholder="In one sentence, what have you tried so far?"
+            value={sentence}
+            onChange={(e) => {
+              setSentence(e.target.value);
+              if (error) setError('');
+            }}
+            required
+          />
         </div>
-      )}
 
-      {/* Order 6: What happens next */}
-      <p className="v4-what-happens-next">
-        I read these myself. You'll hear back from me, not a sequence.
-      </p>
-
-      {/* Order 7: Secondary link — small, underneath */}
-      <div className="v4-secondary-link-wrap">
-        <span className="v4-secondary-link-text">
-          Not ready to write? Read the chapter on this:{' '}
-          <a
-            href="https://bossupva.com/beyond-the-hustle-book"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="v4-secondary-link"
+        <button
+          type="submit"
+          className="v4-send-tam-btn"
+          style={{
+            marginTop: '16px',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px'
+          }}
+        >
+          <span>Submit Answer & Continue</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            Beyond Hustle, Chapter 9
-          </a>
-        </span>
-      </div>
-
-      <div style={{ textAlign: 'center', marginTop: '24px' }}>
-        <button onClick={onRestart} className="v4-retake-btn">
-          Retake Diagnostic
+            <path d="M3 9H15M15 9L10.5 4.5M15 9L10.5 13.5" />
+          </svg>
         </button>
-      </div>
+      </form>
     </div>
   );
 }
