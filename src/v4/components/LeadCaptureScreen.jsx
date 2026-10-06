@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { quizMeta } from '../data/quizData';
 import { supabase } from '../../lib/supabase';
 
-export default function LeadCaptureScreen({ results, answers, triedSentence, onRestart }) {
+export default function LeadCaptureScreen({ results, answers, triedSentence, onRestart, onBack }) {
   const { archetype, structuralScore, weakestEngine } = results || {};
 
   const [name, setName] = useState('');
@@ -12,7 +12,7 @@ export default function LeadCaptureScreen({ results, answers, triedSentence, onR
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    if (e) e.preventDefault();
     if (!name.trim() || !email.trim()) {
       setError('Please fill in your name and email.');
       return;
@@ -87,41 +87,54 @@ export default function LeadCaptureScreen({ results, answers, triedSentence, onR
   };
 
   return (
-    <div className="v4-result-container">
-      <div style={{ textAlign: 'center', marginBottom: '24px' }}>
+    <div className="v4-result-container" style={{ maxWidth: '600px', margin: '0 auto', padding: '24px 16px' }}>
+      {/* Header Logo */}
+      <div style={{ textAlign: 'center', marginBottom: '32px' }}>
         <img
           src={quizMeta.logoUrl}
-          alt="Beyond Hustle Logo"
+          alt="Women Who Boss Up Logo"
           className="v4-quiz-logo"
-          style={{ margin: '0 auto' }}
+          style={{ height: '70px', width: 'auto', margin: '0 auto' }}
         />
       </div>
 
       <form onSubmit={handleSubmit} className="v4-reply-box-form">
-        <div style={{ textAlign: 'center', marginBottom: '24px' }}>
-          <h2 style={{
+        {/* Dynamic / Static Heading matching the image style */}
+        <div style={{ textAlign: 'left', marginBottom: '28px' }}>
+          <h1 style={{
             fontFamily: "'Playfair Display', serif",
-            fontSize: '22px',
-            fontWeight: 700,
+            fontSize: '28px',
+            lineHeight: '1.25',
+            fontWeight: 800,
             color: '#1D2127',
-            marginBottom: '6px'
+            marginBottom: '12px'
           }}>
-            Where should Tam send your response?
-          </h2>
-          <p style={{ fontSize: '14px', color: '#7c736a', margin: 0 }}>
-            Enter your contact details below to send your answer directly to Tam.
+            {archetype?.headline || "You're a Hustler. The business is you, and right now that's the whole ceiling."}
+          </h1>
+          <p style={{ fontSize: '16px', color: '#88827A', margin: 0, fontWeight: 400 }}>
+            That's where you are. Here's what's actually holding it there.
           </p>
         </div>
 
-        {error && <div className="v4-form-error">{error}</div>}
+        {error && <div className="v4-form-error" style={{ color: '#d9534f', marginBottom: '16px' }}>{error}</div>}
 
-        <div className="v4-form-row">
+        {/* Inputs row */}
+        <div className="v4-form-row" style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
           <div className="v4-form-group" style={{ flex: 1 }}>
-            <label className="v4-field-label">Your Name *</label>
+            <label className="v4-field-label" style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#2b2b2b', marginBottom: '6px' }}>
+              Your Name *
+            </label>
             <input
               type="text"
               className="v4-text-input"
-              style={{ paddingLeft: '14px' }}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                borderRadius: '8px',
+                border: '1px solid #E2E8F0',
+                fontSize: '14px',
+                outline: 'none'
+              }}
               placeholder="First & Last Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -131,11 +144,20 @@ export default function LeadCaptureScreen({ results, answers, triedSentence, onR
           </div>
 
           <div className="v4-form-group" style={{ flex: 1 }}>
-            <label className="v4-field-label">Your Email *</label>
+            <label className="v4-field-label" style={{ display: 'block', fontSize: '14px', fontWeight: 600, color: '#2b2b2b', marginBottom: '6px' }}>
+              Your Email *
+            </label>
             <input
               type="email"
               className="v4-text-input"
-              style={{ paddingLeft: '14px' }}
+              style={{
+                width: '100%',
+                padding: '12px 14px',
+                borderRadius: '8px',
+                border: '1px solid #E2E8F0',
+                fontSize: '14px',
+                outline: 'none'
+              }}
               placeholder="you@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -145,47 +167,66 @@ export default function LeadCaptureScreen({ results, answers, triedSentence, onR
           </div>
         </div>
 
-        <button type="submit" className="v4-send-tam-btn" disabled={isSubmitting || submitted}>
-          {isSubmitting ? 'Sending...' : submitted ? 'Sent!' : 'Send it to Tam'}
-        </button>
+        {/* Bottom Navigation Bar */}
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          backgroundColor: '#984351',
+          borderRadius: '10px',
+          overflow: 'hidden',
+          marginTop: '20px'
+        }}>
+          <button
+            type="button"
+            onClick={onBack || onRestart}
+            style={{
+              backgroundColor: '#A89E9C',
+              color: '#FFFFFF',
+              border: 'none',
+              padding: '14px 24px',
+              fontSize: '15px',
+              fontWeight: 500,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}
+          >
+            ‹ Back
+          </button>
+          
+          <div style={{ flex: 1 }} />
+
+          <button
+            type="submit"
+            disabled={isSubmitting || submitted}
+            style={{
+              backgroundColor: '#C8665A',
+              color: '#FFFFFF',
+              border: 'none',
+              padding: '14px 28px',
+              fontSize: '15px',
+              fontWeight: 600,
+              cursor: isSubmitting || submitted ? 'not-allowed' : 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}
+          >
+            {isSubmitting ? 'Sending...' : submitted ? 'Submitted!' : 'Continue →'}
+          </button>
+        </div>
       </form>
 
-      {/* Success notification under the form */}
+      {/* Success notification */}
       {submitted && (
-        <div className="v4-thank-you-card" style={{ marginTop: '20px' }}>
-          <div className="v4-thank-you-title">Submitted!</div>
-          <p className="v4-thank-you-desc">
+        <div className="v4-thank-you-card" style={{ marginTop: '20px', padding: '16px', backgroundColor: '#F4F9F5', borderRadius: '8px', border: '1px solid #D1E7DD' }}>
+          <div className="v4-thank-you-title" style={{ fontWeight: 'bold', color: '#0F5132' }}>Submitted!</div>
+          <p className="v4-thank-you-desc" style={{ margin: 0, fontSize: '14px', color: '#0F5132' }}>
             Your response has been successfully submitted.
           </p>
         </div>
       )}
-
-      {/* What happens next */}
-      <p className="v4-what-happens-next">
-       I read these myself. You'll hear back from me directly and what’s your next step.
-
-      </p>
-
-      {/* Secondary link */}
-      <div className="v4-secondary-link-wrap">
-        <span className="v4-secondary-link-text">
-          Not ready to write? Read the chapter on this:{' '}
-          <a
-            href="https://bossupva.com/beyond-the-hustle-book"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="v4-secondary-link"
-          >
-            Beyond Hustle, Chapter 9
-          </a>
-        </span>
-      </div>
-
-      <div style={{ textAlign: 'center', marginTop: '24px' }}>
-        <button onClick={onRestart} className="v4-retake-btn">
-          Retake Diagnostic
-        </button>
-      </div>
     </div>
   );
 }
