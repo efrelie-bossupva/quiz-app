@@ -1,4 +1,4 @@
-```jsx
+
 import React, { useState } from 'react';
 import './App.css';
 import { questions, calculateQuizResults } from './data/quizData';
@@ -122,4 +122,4 @@ export default function App() {
     </div>
   );
 }
-```
+
