@@ -162,7 +162,8 @@ export default function LeadCaptureScreen({ results, answers, triedSentence, onR
 
       {/* What happens next */}
       <p className="v4-what-happens-next">
-        I read these myself. You'll hear back from me, not a sequence.
+       I read these myself. You'll hear back from me directly and what’s your next step.
+
       </p>
 
       {/* Secondary link */}
