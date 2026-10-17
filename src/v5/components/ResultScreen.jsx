@@ -33,16 +33,6 @@ export default function ResultScreen({
 
   return (
     <div className="v5-result-screen">
-      {/* Top Report Byline */}
-      <div className="v5-result-byline">
-        <span className="v5-result-byline__user">
-          Remodel readiness report for {userName}
-        </span>
-        <span className="v5-result-byline__date">
-          {todayStr}
-        </span>
-      </div>
-
       {/* Hero Result Section */}
       <div className="v5-result-hero">
         <div className="v5-result-hero__left">
@@ -297,80 +287,17 @@ export default function ResultScreen({
       </section>
 
       {/* Integration placeholder note */}
-      <div className="v5-integration-banner">
-        <span>Integration placeholder.</span> Lead capture is active in local storage. Set <code>CONFIG.leadWebhookUrl</code> to deliver automated PDF reports and save leads to your CRM.
-      </div>
-
-      {/* Action Buttons Row */}
-      <div className="v5-actions-row">
-        <button
-          type="button"
-          className="v5-btn v5-btn--back"
-          onClick={onRestart}
-          id="retake-assessment-btn"
-        >
-          Retake the assessment
-        </button>
-
-        <button
-          type="button"
-          className="v5-action-link"
-          onClick={handlePrint}
-          id="print-report-btn"
-        >
-          Print or save this report
-        </button>
-
-        <button
-          type="button"
-          className="v5-action-link"
-          onClick={() => setShowReviewModal(true)}
-          id="review-answers-btn"
-        >
-          Review my answers
-        </button>
-      </div>
-
-      {/* CRM Preview Toggle */}
-      <div className="v5-crm-preview-box">
-        <button
-          type="button"
-          className="v5-crm-toggle"
-          onClick={() => setShowIntegrationPreview((prev) => !prev)}
-        >
-          {showIntegrationPreview ? '▾ Hide Integration Details' : '▸ Integration preview: lead record sent to your email platform or CRM'}
-        </button>
-        {showIntegrationPreview && (
-          <pre className="v5-crm-payload">
-            {JSON.stringify(
-              {
-                lead: {
-                  firstName: userName,
-                  email: leadInfo?.email || 'alex@example.com'
-                },
-                score: {
-                  total: results.totalScore,
-                  max: results.maxScore,
-                  percentage: `${results.percentage}%`,
-                  tier: results.profile.tier,
-                  profile: results.profile.name,
-                  strongestArea: results.strongestAreaText,
-                  recommendedOffer: results.recommendedNextStep.url,
-                  tags: results.tags
-                },
-                categories: results.categories.map((c) => ({
-                  name: c.name,
-                  percentage: `${c.pct}%`,
-                  risk: c.risk
-                })),
-                submittedAt: new Date().toISOString()
-              },
-              null,
-              2
-            )}
-          </pre>
-        )}
-      </div>
+        {/* Action Buttons Row */}
+        <div className="v5-actions-row">
+          <button
+            type="button"
+            className="v5-btn v5-btn--back"
+            onClick={onRestart}
+            id="retake-assessment-btn"
+          >
+            Retake the assessment
+          </button>
+        </div>
 
       {/* Disclaimer */}
       <footer className="v5-result-footer">
