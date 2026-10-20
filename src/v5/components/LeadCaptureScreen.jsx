@@ -54,7 +54,7 @@ export default function LeadCaptureScreen({
       // Try sending to Supabase if configured
       if (supabase) {
         try {
-          const { error: dbErr } = await supabase.from('quiz_submissions').insert([
+          const { error: dbErr } = await supabase.from('quiz_submissions_v5').insert([
             {
               first_name: firstName.trim(),
               last_name: '',
@@ -66,9 +66,9 @@ export default function LeadCaptureScreen({
             }
           ]);
           if (dbErr) {
-            console.warn('Supabase insert notice (quiz_submissions):', dbErr.message);
+            console.warn('Supabase insert notice (quiz_submissions_v5):', dbErr.message);
           } else {
-            console.log('Successfully saved to Supabase quiz_submissions!');
+            console.log('Successfully saved to Supabase quiz_submissions_v5!');
           }
         } catch (dbErr) {
           console.warn('Supabase insert skipped or failed:', dbErr);
