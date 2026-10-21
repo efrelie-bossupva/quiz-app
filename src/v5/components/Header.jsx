@@ -2,36 +2,26 @@ import React from 'react';
 
 export default function Header({ onLogoClick }) {
   return (
-    <header className="v5-header" style={{ height: 'auto', minHeight: '90px', overflow: 'hidden' }}>
-      <div className="v5-header__container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 16px' }}>
-        <a 
-          className="v5-header__brand" 
+    <header className="v5-header">
+      <div className="v5-header__container">
+        <a
+          className="v5-header__brand"
           href="https://smarttoolsconstructionacademy.com/"
           target="_blank"
           rel="noopener noreferrer"
-          style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}
         >
-    <img 
-            src={`${import.meta.env.BASE_URL}smarttools-logo.png`} 
-            alt="Smart Tools Construction Academy" 
-            style={{ height: '74px', width: 'auto', objectFit: 'contain' }} 
-          
+          <img
+            className="v5-header__logo"
+            src={`${import.meta.env.BASE_URL}smarttools-logo.png`}
+            alt="Smart Tools Construction Academy"
           />
-          <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
-            <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '15px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-              Smart Tools
-            </span>
-            <span style={{ color: '#f59e0b', fontSize: '9.5px', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-              Construction Academy
-            </span>
-            <span style={{ color: '#64748b', fontSize: '7.5px', fontWeight: 600, letterSpacing: '0.14em', marginTop: '1px' }}>
-              TRAINING • TOOLS • DIY
-            </span>
+          <div className="v5-header__brand-text">
+            <span className="v5-header__brand-name">Smart Tools</span>
+            <span className="v5-header__academy">Construction Academy</span>
+            <span className="v5-header__tagline">TRAINING • TOOLS • DIY</span>
           </div>
         </a>
-        <div className="v5-header__title">
-          Remodel Readiness Diagnostic
-        </div>
+        <div className="v5-header__title">Remodel Readiness Diagnostic</div>
       </div>
     </header>
   );
