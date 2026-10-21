@@ -45,9 +45,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 10px 24px;
-  height: auto;           /* Allows header to grow organically */
-  overflow: hidden;       /* Clips any internal overflow */
+  padding: 8px 24px;
 }
 
 .v5-header__container {
@@ -64,11 +62,49 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
+  min-width: 0;
   transition: opacity 0.15s ease;
 }
 
-.v5-header__brand:hover {
-  opacity: 0.88;
+.v5-header__brand:hover { opacity: 0.88; }
+
+.v5-header__logo {
+  height: 74px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.v5-header__brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  min-width: 0;
+}
+
+.v5-header__brand-name {
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.v5-header__academy {
+  color: var(--v5-accent);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.v5-header__tagline {
+  color: var(--v5-text-muted);
+  font-size: 7.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  margin-top: 1px;
 }
 
 .v5-header__title {
