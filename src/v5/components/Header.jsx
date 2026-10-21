@@ -15,7 +15,7 @@ export default function Header({ onLogoClick }) {
           <img 
             src={${import.meta.env.BASE_URL}smarttools-logo.png} 
             alt="Smart Tools Construction Academy" 
-            style={{ height: '44px', width: 'auto', objectFit: 'contain' }} 
+            style={{ height: '64px', width: 'auto', objectFit: 'contain' }} 
           />
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
             <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '15px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
