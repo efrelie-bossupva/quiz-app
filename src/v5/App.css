@@ -1193,6 +1193,53 @@
   justify-content: flex-end;
 }
 
+/* FORCE LOGO SIZE */
+.v5-header__brand img.v5-header__logo {
+  display: block !important;
+  width: auto !important;
+  height: 76px !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain;
+  flex-shrink: 0 !important;
+}
+
+/* Give the header enough vertical space */
+.v5-header {
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.v5-header__container {
+  min-height: 80px;
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+  .v5-header__brand img.v5-header__logo {
+    height: 68px !important;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .v5-header__brand img.v5-header__logo {
+    height: 60px !important;
+  }
+
+  .v5-header__container {
+    min-height: auto;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 360px) {
+  .v5-header__brand img.v5-header__logo {
+    height: 52px !important;
+  }
+}
+
+
 /* ========================================================
    ANIMATIONS & RESPONSIVE
    ======================================================== */
