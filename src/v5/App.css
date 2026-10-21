@@ -4,22 +4,15 @@
    ======================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-/* Hide horizontal scrollbar across all browsers */
-html, body {
-    overflow-x: hidden !important;
-    max-width: 100vw;
-}
+html {
+  overflow-x: clip;   
 
-/* Hide scrollbar but keep functionality (Chrome/Safari/Edge) */
-body::-webkit-scrollbar:horizontal {
-    display: none;
-    height: 0;
-    width: 0;
-}
-
-/* Firefox */
 body {
-    scrollbar-width: none;
+  margin: 0;       
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 :root {
   --v5-bg: #0c1527;
