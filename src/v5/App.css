@@ -1282,14 +1282,20 @@
 }
 
 @media (max-width: 480px) {
+  .v5-header__container {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+  .v5-header__logo { height: 48px !important; }
   .v5-header__title {
-    text-align: center;
-    font-size: 0.78rem;
+    text-align: center !important;
+    font-size: 0.78rem !important;
     padding-top: 6px;
     border-top: 1px solid rgba(255, 255, 255, 0.07);
+    width: 100%;
   }
 }
-
 
 /* ========================================================
    PRINT STYLES
