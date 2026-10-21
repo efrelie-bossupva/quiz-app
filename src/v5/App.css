@@ -1238,6 +1238,234 @@
   }
 }
 
+/* ================================
+   HEADER BASE
+================================ */
+
+.v5-header {
+  width: 100%;
+  background: #081120;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+  box-sizing: border-box;
+}
+
+.v5-header *,
+.v5-header *::before,
+.v5-header *::after {
+  box-sizing: border-box;
+}
+
+.v5-header__container {
+  width: 100%;
+  max-width: 1100px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 16px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* BRAND */
+
+.v5-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.v5-header__logo {
+  display: block;
+  width: 60px;
+  height: 52px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+
+.v5-header__brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  line-height: 1.15;
+}
+
+.v5-header__brand-name {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.v5-header__academy {
+  color: #f59e0b;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.v5-header__tagline {
+  color: #64748b;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+}
+
+/* DIAGNOSTIC TITLE */
+
+.v5-header__title {
+  color: #a8c1e3;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+
+  flex: 0 1 240px;
+  min-width: 0;
+  text-align: left;
+  overflow-wrap: break-word;
+}
+
+/* ================================
+   TABLETS
+================================ */
+
+@media (max-width: 768px) {
+  .v5-header__container {
+    padding: 14px 18px;
+    gap: 16px;
+  }
+
+  .v5-header__logo {
+    width: 48px;
+    height: 44px;
+  }
+
+  .v5-header__brand {
+    gap: 10px;
+  }
+
+  .v5-header__brand-name {
+    font-size: 14px;
+  }
+
+  .v5-header__academy {
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+
+  .v5-header__tagline {
+    font-size: 7px;
+    letter-spacing: 0.06em;
+  }
+
+  .v5-header__title {
+    flex-basis: 180px;
+    font-size: 14px;
+  }
+}
+
+/* ================================
+   MOBILE PHONES
+================================ */
+
+@media (max-width: 480px) {
+  .v5-header__container {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 12px;
+  }
+
+  .v5-header__brand {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .v5-header__logo {
+    width: 48px;
+    height: 44px;
+  }
+
+  .v5-header__brand-text {
+    flex: 1;
+  }
+
+  .v5-header__brand-name {
+    font-size: 14px;
+    line-height: 1.1;
+  }
+
+  .v5-header__academy {
+    font-size: 9px;
+    line-height: 1.3;
+    letter-spacing: 0.06em;
+  }
+
+  .v5-header__tagline {
+    font-size: 7px;
+    letter-spacing: 0.08em;
+  }
+
+  .v5-header__title {
+    width: 100%;
+    max-width: none;
+    flex: none;
+    padding-left: 0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* EXTRA SMALL PHONES */
+
+@media (max-width: 360px) {
+  .v5-header__container {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .v5-header__logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .v5-header__brand {
+    gap: 8px;
+  }
+
+  .v5-header__brand-name {
+    font-size: 12px;
+  }
+
+  .v5-header__academy {
+    font-size: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  .v5-header__tagline {
+    font-size: 6.5px;
+  }
+
+  .v5-header__title {
+    font-size: 13px;
+  }
+}
+
 /* ========================================================
    PRINT STYLES
    ======================================================== */
