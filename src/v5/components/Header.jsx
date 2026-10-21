@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import SmartToolsLogo from './SmartToolsLogo';
 
 export default function Header({ onLogoClick }) {
@@ -13,7 +13,7 @@ export default function Header({ onLogoClick }) {
           style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}
         >
           <img 
-            src={`${import.meta.env.BASE_URL}smarttools-logo.png`} 
+            src={${import.meta.env.BASE_URL}smarttools-logo.png} 
             alt="Smart Tools Construction Academy" 
             style={{ height: '44px', width: 'auto', objectFit: 'contain' }} 
           />
