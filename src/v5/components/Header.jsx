@@ -1,5 +1,5 @@
 import React from 'react';
-import SmartToolsLogo from './SmartToolsLogo';
+
 
 export default function Header({ onLogoClick }) {
   return (
