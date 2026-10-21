@@ -1,10 +1,9 @@
 import React from 'react';
 
-
 export default function Header({ onLogoClick }) {
   return (
-    <header className="v5-header">
-      <div className="v5-header__container">
+    <header className="v5-header" style={{ height: 'auto', minHeight: '90px', overflow: 'hidden' }}>
+      <div className="v5-header__container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 16px' }}>
         <a 
           className="v5-header__brand" 
           href="https://smarttoolsconstructionacademy.com/"
