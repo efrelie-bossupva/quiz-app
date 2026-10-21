@@ -36,13 +36,18 @@
 /* ========================================================
    HEADER
    ======================================================== */
+/* ========================================================
+   HEADER
+   ======================================================== */
 .v5-header {
   background-color: var(--v5-header-bg);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   position: sticky;
   top: 0;
   z-index: 50;
-  padding: 12px 24px;
+  padding: 10px 24px;
+  height: auto;           /* Allows header to grow organically */
+  overflow: hidden;       /* Clips any internal overflow */
 }
 
 .v5-header__container {
@@ -51,11 +56,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 16px;
 }
 
 .v5-header__brand {
   display: flex;
   align-items: center;
+  gap: 12px;
+  text-decoration: none;
   transition: opacity 0.15s ease;
 }
 
@@ -68,8 +76,8 @@
   font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: -0.01em;
+  text-align: right;
 }
-
 /* ========================================================
    MAIN CONTAINER
    ======================================================== */
