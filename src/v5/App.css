@@ -1419,3 +1419,14 @@ html, body {
   box-sizing: border-box;
 }
 
+
+/* Hide the page scrollbar everywhere, keep scrolling */
+html {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* old Edge/IE */
+}
+html::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari, Edge */
+  width: 0;
+  height: 0;
+}
