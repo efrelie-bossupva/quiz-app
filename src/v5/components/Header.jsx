@@ -11,10 +11,11 @@ export default function Header({ onLogoClick }) {
           rel="noopener noreferrer"
           style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}
         >
-          <img 
+    <img 
             src={`${import.meta.env.BASE_URL}smarttools-logo.png`} 
             alt="Smart Tools Construction Academy" 
             style={{ height: '74px', width: 'auto', objectFit: 'contain' }} 
+          
           />
           <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.15 }}>
             <span style={{ color: '#ffffff', fontWeight: 800, fontSize: '15px', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
