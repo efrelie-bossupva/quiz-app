@@ -4,19 +4,7 @@
    ======================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-html, body {
-  margin: 0;
-  padding: 0;
-}
-#root {
-  margin: 0;
-  padding: 0;
-  max-width: none;
-}
-.v5-app-root {
-  min-height: 100vh;
-  box-sizing: border-box;
-}
+
 :root {
   --v5-bg: #0c1527;
   --v5-header-bg: #09101f;
@@ -1421,5 +1409,17 @@ html, body {
   }
 }
 
-
+html, body {
+  margin: 0;
+  padding: 0;
+}
+#root {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+.v5-app-root {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
 
